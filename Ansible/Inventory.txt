@@ -1,0 +1,14 @@
+# Sample Inventory File
+
+# Web Servers
+app01 ansible_host=172.16.238.10 ansible_connection=ssh ansible_user=tony ansible_ssh_pass=Ir0nM@n
+app02 ansible_host=172.16.238.11 ansible_connection=ssh ansible_user=steve ansible_ssh_pass=Am3ricA
+app03 ansible_host=172.16.238.12 ansible_connection=ssh ansible_user=banner ansible_ssh_pass=BigGr33n
+
+# Database Servers
+db01 ansible_host=server4.company.com ansible_connection=winrm ansible_user=administrator ansible_password=Password123!
+
+[web_servers]
+web1
+web2
+web3
