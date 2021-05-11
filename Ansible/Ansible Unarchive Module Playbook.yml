@@ -1,0 +1,18 @@
+- name: Ansible Unarchive Module
+  hosts: stapp01,stapp02,stapp03
+  
+  tasks:  
+  - name: Unzip file
+    unarchive:
+      src: /usr/src/data/xfusion.zip
+      dest: /opt/data/
+    become: yes
+
+  - name: Change file ownership, group and permissions
+    file:
+      path: /opt/data
+      owner: '{{ansible_user}}'
+      group: '{{ansible_user}}'
+      mode: '0655'
+      recurse: yes
+    become: yes
