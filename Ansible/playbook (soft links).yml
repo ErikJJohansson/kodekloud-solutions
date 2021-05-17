@@ -1,0 +1,51 @@
+---
+- name: add blog file
+  hosts: stapp01
+  tasks:
+  - name: create file
+    file:
+      path: /opt/sysops/blog.txt
+      state: touch
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
+    become: yes
+  - name: Create a symbolic link
+    file:
+      src: /opt/sysops
+      dest: /var/www/html
+      state: link
+    become: yes
+
+- name: add story file
+  hosts: stapp02
+  tasks:
+  - name: create file
+    file:
+      path: /opt/sysops/story.txt
+      state: touch
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
+    become: yes
+  - name: Create a symbolic link
+    file:
+      src: /opt/sysops
+      dest: /var/www/html
+      state: link
+    become: yes
+
+- name: add media file
+  hosts: stapp03
+  tasks:
+  - name: create file
+    file:
+      path: /opt/sysops/media.txt
+      state: touch
+      owner: "{{ ansible_user }}"
+      group: "{{ ansible_user }}"
+    become: yes
+  - name: Create a symbolic link
+    file:
+      src: /opt/sysops
+      dest: /var/www/html
+      state: link
+    become: yes
