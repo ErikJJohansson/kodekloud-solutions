@@ -1,0 +1,23 @@
+---
+- name: add webdata file
+  hosts: stapp01
+  tasks:
+  - name: install packages
+    package:
+      name: 
+       - httpd
+       - php
+      state: latest
+
+  - name: create directory
+    file:
+      path: /var/www/html/myroot
+      state: directory
+    become: yes
+
+
+  - name: start httpd
+    service:
+      name: httpd
+      enabled: yes
+      state: started
