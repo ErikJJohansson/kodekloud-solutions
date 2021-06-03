@@ -1,6 +1,6 @@
 ---
 - name: add webdata file
-  hosts: stapp01
+  hosts: stapp02
   tasks:
   - name: install packages
     package:
@@ -8,6 +8,7 @@
        - httpd
        - php
       state: latest
+    become: yes
 
   - name: create directory
     file:
@@ -15,9 +16,29 @@
       state: directory
     become: yes
 
+  - name: change default document root of Apache
+    lineinfile:
+      path: /etc/httpd/conf/httpd.conf
+      regexp: 'DocumentRoot "/var/www/html"'
+      line: 'DocumentRoot "/var/www/html/myroot"'
+    become: yes
+
+  - name: copy template
+    copy:
+      src: ~/playbooks/templates/phpinfo.php.j2
+      dest: /var/www/html/myroot/phpinfo.php
+      owner: apache
+      group: apache
+    become: yes     
 
   - name: start httpd
     service:
       name: httpd
+      state: restarted
+    become: yes
+  
+  - name: enable httpd
+    service:
+      name: httpd
       enabled: yes
-      state: started
+    become: yes
