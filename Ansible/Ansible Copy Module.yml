@@ -1,0 +1,9 @@
+---
+- name: Copy File
+  hosts: app01,app02,app03
+  tasks:
+  - name: copy file
+    copy:
+      src: /usr/src/dba/index.html
+      dest: /opt/dba
+    become: yes   
